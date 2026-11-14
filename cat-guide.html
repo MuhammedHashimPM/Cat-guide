@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Talking with Cats</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Noto+Sans+Malayalam:wght@400;600&family=Nunito:wght@400;600&display=swap">
+<style>
+:root{--bg:#1f2a44;--ink:#f3efe6;--mute:#b5bccf;--card:#2a3858;--acc:#ffc857;--line:#3d4d75;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fbf6ea;--ink:#1f2a44;--mute:#5a6480;--card:#fff;--acc:#c77d00;--line:#e4d9bd}}
+:root[data-theme="light"]{--bg:#fbf6ea;--ink:#1f2a44;--mute:#5a6480;--card:#fff;--acc:#c77d00;--line:#e4d9bd}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,"Noto Sans Malayalam",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:24px 20px 64px}
+.top{display:flex;justify-content:flex-end;gap:8px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 16px}
+button[aria-pressed="true"]{background:var(--acc);color:#1f2a44;border-color:var(--acc);font-weight:600}
+button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+h1{font:800 clamp(2.6rem,11vw,4.6rem)/1 Fraunces,"Noto Sans Malayalam",serif;margin:28px 0 12px}
+.lead{color:var(--mute);margin:0 0 20px;max-width:34em}
+.eyes{display:flex;gap:18px;justify-content:center;margin:28px 0 8px}
+.eye{width:74px;height:74px;border-radius:50%;background:var(--acc);display:grid;place-items:center;overflow:hidden}
+.pupil{width:20px;height:44px;border-radius:50%;background:#1f2a44;transition:transform .15s;transform-origin:center}
+.eyes.blink .eye{animation:b 1.2s ease-in-out}
+@keyframes b{0%,100%{clip-path:inset(0)}50%{clip-path:inset(46% 0 46% 0)}}
+.hint{text-align:center;color:var(--mute);font-size:.9rem;margin:0 0 36px}
+h2{font:600 1.6rem/1.2 Fraunces,"Noto Sans Malayalam",serif;margin:40px 0 14px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 10px;padding:0 16px}
+summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--acc);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 14px;color:var(--mute)}
+ul{padding-left:20px}li{margin:0 0 10px}
+.ml{display:none}
+[data-lang="ml"] .en{display:none}[data-lang="ml"] .ml{display:revert}
+@media (prefers-reduced-motion:reduce){.eyes.blink .eye{animation:none}}
+</style>
+</head>
+<body>
+<main id="app">
+<div class="top" role="group" aria-label="Language">
+<button id="b-en" aria-pressed="true">English</button>
+<button id="b-ml" aria-pressed="false">മലയാളം</button>
+</div>
+
+<h1><span class="en">Talking with cats</span><span class="ml">പൂച്ചയോട് സംസാരിക്കാം</span></h1>
+<p class="lead"><span class="en">Cats speak mostly with their bodies. Watch the whole animal, not just the sound.</span><span class="ml">പൂച്ചകൾ കൂടുതലും ശരീരഭാഷയിലൂടെയാണ് സംസാരിക്കുന്നത്. ശബ്ദം മാത്രമല്ല, പൂച്ചയെ മൊത്തത്തിൽ ശ്രദ്ധിക്കുക.</span></p>
+
+<div class="eyes" id="eyes" aria-hidden="true"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div>
+<p class="hint"><button id="blink"><span class="en">Slow blink back</span><span class="ml">പതുക്കെ കണ്ണടച്ച് മറുപടി നൽകൂ</span></button></p>
+
+<h2><span class="en">Read the signals</span><span class="ml">സൂചനകൾ വായിക്കാം</span></h2>
+<div id="signals"></div>
+
+<h2><span class="en">Talk back</span><span class="ml">തിരിച്ച് സംസാരിക്കാം</span></h2>
+<ul id="tips"></ul>
+
+<h2><span class="en">Build a routine</span><span class="ml">ശീലം ഉണ്ടാക്കുക</span></h2>
+<p><span class="en">Fixed feeding times, wand-toy play and calm reactions help your cat learn what you mean. Cats quickly learn their name and food-related sounds.</span><span class="ml">കൃത്യമായ ഭക്ഷണ സമയം, വടി കളിപ്പാട്ടം ഉപയോഗിച്ചുള്ള കളി, ശാന്തമായ പെരുമാറ്റം എന്നിവ പൂച്ചയ്ക്ക് നിങ്ങളെ മനസ്സിലാക്കാൻ സഹായിക്കും. സ്വന്തം പേരും ഭക്ഷണവുമായി ബന്ധപ്പെട്ട ശബ്ദങ്ങളും പൂച്ചകൾ വേഗം പഠിക്കും.</span></p>
+</main>
+<script>
+var S=[
+["Slow blink","പതുക്കെ കണ്ണടച്ച് തുറക്കുക","Trust and affection. Return it with a slow blink of your own.","വിശ്വാസവും സ്നേഹവും. നിങ്ങളും പതുക്കെ കണ്ണടച്ച് മറുപടി നൽകുക."],
+["Tail straight up","വാൽ മുകളിലേക്ക് നേരെ","A happy, friendly greeting. A puffed tail means fear or agitation.","സന്തോഷത്തോടെയുള്ള സ്വാഗതം. വാൽ വീർത്തിരുന്നാൽ പേടിയോ ദേഷ്യമോ ആണ്."],
+["Ears","ചെവി","Forward means relaxed and curious. Flattened sideways or back means scared or angry.","മുന്നോട്ടാണെങ്കിൽ ശാന്തം, കൗതുകം. വശങ്ങളിലേക്കോ പിന്നിലേക്കോ പരത്തിയാൽ പേടി അല്ലെങ്കിൽ ദേഷ്യം."],
+["Purring","മുരളൽ (purring)","Usually contentment, but cats also purr when stressed or in pain. Check the rest of the body.","സാധാരണയായി സന്തോഷം. പക്ഷേ സമ്മർദ്ദത്തിലോ വേദനയിലോ ആയിരിക്കുമ്പോഴും പൂച്ചകൾ മുരളും, അതിനാൽ ശരീരത്തിലെ മറ്റ് സൂചനകളും നോക്കുക."],
+["Kneading","കൈ ഞെക്കുക (kneading)","Comfort and affection.","സുഖവും സ്നേഹവും."],
+["Meowing","മ്യാവൂ","Mostly aimed at humans. Usually means feed me, open the door, or pay attention to me.","കൂടുതലും മനുഷ്യരോടാണ്. സാധാരണ അർത്ഥം: ഭക്ഷണം താ, വാതിൽ തുറക്ക്, ശ്രദ്ധിക്ക്."]];
+var T=[
+["Use a soft, higher-pitched voice.","മൃദുവായ, അൽപ്പം കനം കുറഞ്ഞ ശബ്ദത്തിൽ സംസാരിക്കുക."],
+["Let the cat come to you. Offer a finger at nose level to sniff before petting.","പൂച്ച നിങ്ങളുടെ അടുത്തേക്ക് വരട്ടെ. തൊടുന്നതിന് മുമ്പ് മൂക്കിന്റെ ഉയരത്തിൽ ഒരു വിരൽ മണക്കാൻ നീട്ടുക."],
+["Avoid staring directly. To a cat, that's a threat.","നേരിട്ട് തുറിച്ചു നോക്കരുത്; പൂച്ചയ്ക്ക് അത് ഭീഷണിയാണ്."],
+["Pet cheeks, chin and the base of the ears. Many cats dislike belly rubs even when they show their belly.","കവിൾ, താടി, ചെവിയുടെ ചുവട് എന്നിവിടങ്ങളിൽ തലോടുക. വയർ കാണിച്ചാലും പല പൂച്ചകൾക്കും വയറിൽ തൊടുന്നത് ഇഷ്ടമല്ല."],
+["Stop when the tail flicks, ears flatten or skin twitches. That means enough.","വാൽ ആട്ടുക, ചെവി പരത്തുക, തൊലി വിറയ്ക്കുക എന്നിവ കണ്ടാൽ നിർത്തുക. അതിനർത്ഥം മതി എന്നാണ്."]];
+var sg=document.getElementById("signals"),tp=document.getElementById("tips");
+S.forEach(function(s){var d=document.createElement("details");d.innerHTML='<summary><span class="en">'+s[0]+'</span><span class="ml">'+s[1]+'</span></summary><p><span class="en">'+s[2]+'</span><span class="ml">'+s[3]+'</span></p>';sg.appendChild(d)});
+T.forEach(function(t){var l=document.createElement("li");l.innerHTML='<span class="en">'+t[0]+'</span><span class="ml">'+t[1]+'</span>';tp.appendChild(l)});
+var app=document.getElementById("app"),be=document.getElementById("b-en"),bm=document.getElementById("b-ml");
+function setLang(l){app.setAttribute("data-lang",l);document.documentElement.lang=l;be.setAttribute("aria-pressed",l=="en");bm.setAttribute("aria-pressed",l=="ml")}
+be.onclick=function(){setLang("en")};bm.onclick=function(){setLang("ml")};
+var eyes=document.getElementById("eyes");
+document.getElementById("blink").onclick=function(){eyes.classList.remove("blink");void eyes.offsetWidth;eyes.classList.add("blink")};
+document.addEventListener("pointermove",function(e){var p=document.querySelectorAll(".pupil"),x=(e.clientX/innerWidth-.5)*28;p.forEach(function(q){q.style.transform="translateX("+x+"px)"})});
+</script>
+</body>
+</html>
